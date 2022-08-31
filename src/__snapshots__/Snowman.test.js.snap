@@ -12,7 +12,6 @@ exports[`matches snapshot 1`] = `
     <p>
       Wrong Guesses: 
       0
-       hello
     </p>
     <p
       class="Snowman-word"
@@ -207,6 +206,9 @@ exports[`matches snapshot 1`] = `
         z
       </button>
     </p>
+    <button
+      value="Restart"
+    />
   </div>
 </div>
 `;

@@ -9,6 +9,7 @@ import img4 from "./4.png";
 import img5 from "./5.png";
 import img6 from "./6.png";
 
+import {randomWord} from './words.js';
 
 /** Snowman game: plays hangman-style game with a melting snowman.
  *
@@ -32,7 +33,7 @@ function Snowman({
 
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
-  const [answer, setAnswer] = useState((words)[0]);
+  const [answer, setAnswer] = useState(randomWord(words));
 
   /** guessedWord: show current-state of word:
    if guessed letters are {a,p,e}, show "app_e" for "apple"
@@ -59,6 +60,12 @@ function Snowman({
     setNWrong(n => n + (answer.includes(ltr) ? 0 : 1));
   }
 
+  function restartGame() {
+    setNWrong(0);
+    setGuessedLetters(() => new Set());
+    setAnswer(randomWord(words));
+  } 
+
   /** generateButtons: return array of letter buttons to render */
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
@@ -81,6 +88,10 @@ function Snowman({
         <p>Wrong Guesses: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
         <p>{nWrong>=maxWrong ? `You lose! The word is ${answer}` : generateButtons()}</p>
+        <button
+          value="Restart"
+          onClick={restartGame}
+        ></button>
       </div>
   );
 }
